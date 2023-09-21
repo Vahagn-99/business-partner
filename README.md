@@ -25,3 +25,7 @@ cp .env .env.testing
 php artisan migrate:fresh --seed
 
 php artisan test
+
+## Документация
+
+{your-localhost}/api/documentation
