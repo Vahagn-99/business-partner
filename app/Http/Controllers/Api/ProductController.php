@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTO\Validations\Product\FilterProductData;
 use App\DTO\Validations\Product\SaveProductData;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
@@ -38,9 +39,9 @@ class ProductController extends Controller
      *     @OA\Response(response="422", description="validation error"),
      * )
      */
-    public function list(): AnonymousResourceCollection
+    public function list(FilterProductData $filterData): AnonymousResourceCollection
     {
-        return ProductResource::collection($this->repository->getAllProducts());
+        return ProductResource::collection($this->repository->getAllProducts($filterData->all()));
     }
 
     /**

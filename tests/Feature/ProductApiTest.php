@@ -56,6 +56,30 @@ class ProductApiTest extends TestCase
             ->assertJsonCount(100, 'data');
     }
 
+    public function test_user_can_filter_list_product()
+    {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $category = Category::factory()->create();
+        Product::factory(100)->create([
+            'category_id' => $category->getKey()
+        ]);
+
+        Product::factory(2)->create([
+            'name' => 'find me'
+            , 'category_id' => $category->getKey()
+        ]);
+
+        $filter = [
+            'filter' => 'find me'
+        ];
+
+        $response = $this->json('get', "/api/v1/products", $filter);
+        $response->assertStatus(200)
+            ->assertJsonCount(2, 'data');
+    }
+
     public function test_user_with_role_admin_can_create_product()
     {
         $user = User::factory()->create();
@@ -91,7 +115,7 @@ class ProductApiTest extends TestCase
         $category2 = Category::factory()->create();
 
         $product = Product::factory()->create([
-             'name' => 'product before update'
+            'name' => 'product before update'
             , 'category_id' => $category1->getKey()
         ]);
 

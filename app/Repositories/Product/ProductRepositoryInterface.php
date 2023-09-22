@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ProductRepositoryInterface
 {
-    public function getAllProducts(): Collection;
+    public function getAllProducts(array $filter): Collection;
 
     public function saveProduct(array $data): Product|Model;
 

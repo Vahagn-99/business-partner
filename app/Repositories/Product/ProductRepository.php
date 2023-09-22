@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    public function getAllProducts(): Collection
+    public function getAllProducts(array $filter): Collection
     {
-        return Product::with(['images', 'category'])->get();
+        return Product::filter($filter)->with(['images', 'category'])->get();
     }
 
     public function saveProduct(array $data): Product|Model
