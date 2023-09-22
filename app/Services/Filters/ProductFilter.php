@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class ProductFilter extends BaseFilter implements DefaultFilter
 {
-    public function filter(Builder $query, string $filter): void
+    public function filter(Builder $query, string|null $filter): void
     {
         $query->where(function (Builder $query) use ($filter) {
             $query->where('name', 'LIKE', "%$filter%");

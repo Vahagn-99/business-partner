@@ -7,7 +7,7 @@ use Spatie\LaravelData\Data;
 class FilterProductData extends Data
 {
     public function __construct(
-        public string|int|bool $filter
+        public string|int|bool|null $filter
     )
     {
     }

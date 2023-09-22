@@ -77,7 +77,10 @@ class ProductApiTest extends TestCase
 
         $response = $this->json('get', "/api/v1/products", $filter);
         $response->assertStatus(200)
-            ->assertJsonCount(2, 'data');
+            ->assertJsonCount(2, 'data')
+            ->assertJson(['data' => [
+                ['name' => 'find me']
+            ]]);
     }
 
     public function test_user_with_role_admin_can_create_product()
